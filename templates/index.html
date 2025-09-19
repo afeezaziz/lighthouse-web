@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="text-center py-12">
+    <h1 class="text-4xl md:text-6xl font-bold text-white mb-6">
+        <i class="fas fa-lightbulb text-yellow-400 mr-3"></i>
+        Lighthouse
+    </h1>
+    <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+        Explore the Taproot Asset ecosystem with real-time Ark network monitoring and analytics
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/assets" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-200">
+            <i class="fas fa-coins mr-2"></i>
+            Browse Assets
+        </a>
+        <a href="/ark-nodes" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition duration-200">
+            <i class="fas fa-network-wired mr-2"></i>
+            View Ark Nodes
+        </a>
+    </div>
+</div>
+
+<!-- Stats Section -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+    <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm text-gray-400">Total Assets</p>
+                <p class="text-2xl font-bold text-white">1,247</p>
+            </div>
+            <i class="fas fa-coins text-yellow-400 text-2xl"></i>
+        </div>
+    </div>
+    <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm text-gray-400">Ark Nodes</p>
+                <p class="text-2xl font-bold text-white">89</p>
+            </div>
+            <i class="fas fa-network-wired text-blue-400 text-2xl"></i>
+        </div>
+    </div>
+    <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm text-gray-400">Total Value</p>
+                <p class="text-2xl font-bold text-white">$45.2M</p>
+            </div>
+            <i class="fas fa-chart-line text-green-400 text-2xl"></i>
+        </div>
+    </div>
+    <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+        <div class="flex items-center justify-between">
+            <div>
+                <p class="text-sm text-gray-400">24h Volume</p>
+                <p class="text-2xl font-bold text-white">$2.1M</p>
+            </div>
+            <i class="fas fa-exchange-alt text-purple-400 text-2xl"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Assets Section -->
+<div class="mb-12">
+    <h2 class="text-2xl font-bold text-white mb-6">Recent Assets</h2>
+    <div class="bg-gray-800 rounded-lg border border-gray-700 overflow-hidden">
+        <table class="w-full">
+            <thead class="bg-gray-700">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Asset</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Ticker</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Supply</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Created</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Status</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-700">
+                <tr class="hover:bg-gray-750">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-bitcoin text-gray-900 text-sm"></i>
+                            </div>
+                            <span class="text-white">Bitcoin Cash</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">BCH</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">21,000,000</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">2 hours ago</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                            Active
+                        </span>
+                    </td>
+                </tr>
+                <tr class="hover:bg-gray-750">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-purple-400 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-gem text-white text-sm"></i>
+                            </div>
+                            <span class="text-white">Diamond Token</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">DMND</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1,000,000</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">5 hours ago</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                            Active
+                        </span>
+                    </td>
+                </tr>
+                <tr class="hover:bg-gray-750">
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-green-400 rounded-full flex items-center justify-center mr-3">
+                                <i class="fas fa-leaf text-white text-sm"></i>
+                            </div>
+                            <span class="text-white">Green Coin</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">GREEN</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">500,000</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">1 day ago</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                            Pending
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+        <div class="text-center mb-4">
+            <i class="fas fa-search text-blue-400 text-3xl mb-2"></i>
+            <h3 class="text-xl font-bold text-white">Asset Explorer</h3>
+        </div>
+        <p class="text-gray-300">Browse and search through all Taproot Assets with detailed metadata and transaction history.</p>
+    </div>
+    <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+        <div class="text-center mb-4">
+            <i class="fas fa-network-wired text-green-400 text-3xl mb-2"></i>
+            <h3 class="text-xl font-bold text-white">Ark Network</h3>
+        </div>
+        <p class="text-gray-300">Monitor the health and status of Ark nodes across the distributed network.</p>
+    </div>
+    <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+        <div class="text-center mb-4">
+            <i class="fas fa-chart-line text-purple-400 text-3xl mb-2"></i>
+            <h3 class="text-xl font-bold text-white">Real-time Analytics</h3>
+        </div>
+        <p class="text-gray-300">Track market trends, trading volumes, and asset performance in real-time.</p>
+    </div>
+</div>
+{% endblock %}
