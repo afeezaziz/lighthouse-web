@@ -16,7 +16,7 @@ cmds = [
 ]
 
 [start]
-cmd = "/opt/venv/bin/gunicorn --bind 0.0.0.0:$PORT --workers 4 --timeout 120 --chdir /app --factory 'app:create_app'"
+cmd = "/opt/venv/bin/gunicorn --bind 0.0.0.0:$PORT --workers 4 --timeout 120 --chdir /app wsgi:app"
 
 [variables]
 PORT = "8000"
