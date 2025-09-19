@@ -4,34 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lighthouse - Taproot Asset Explorer</title>
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --brand-from: #6366f1; /* indigo-500 */
+        --brand-to: #a855f7;   /* purple-500 */
+      }
+      body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+      .brand-gradient {
+        background: linear-gradient(90deg, var(--brand-from), var(--brand-to));
+        -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+      }
+      .glow:hover { box-shadow: 0 8px 24px rgba(99,102,241,0.35), 0 2px 8px rgba(168,85,247,0.25); }
+    </style>
 </head>
-<body class="bg-gray-900 text-white min-h-screen">
+<body class="bg-gray-950 text-white min-h-screen relative overflow-x-hidden">
+    <!-- Decorative background -->
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 -z-10">
+        <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-[1200px] h-[1200px] rounded-full opacity-20 blur-3xl" style="background: radial-gradient(closest-side, rgba(99,102,241,.25), rgba(168,85,247,.15), transparent);"></div>
+        <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+    </div>
     <!-- Navigation -->
-    <nav class="bg-gray-800 border-b border-gray-700">
+    <nav class="sticky top-0 z-50 bg-gray-900/70 backdrop-blur border-b border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <i class="fas fa-lightbulb text-yellow-400 text-2xl mr-3"></i>
-                        <span class="text-xl font-bold text-white">Lighthouse</span>
+                        <i class="fas fa-lightbulb text-yellow-400 text-2xl mr-3 drop-shadow"></i>
+                        <span class="text-xl font-extrabold brand-gradient tracking-tight">Lighthouse</span>
                     </div>
                     <div class="hidden md:block">
-                        <div class="ml-10 flex items-baseline space-x-4">
-                            <a href="/" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
-                            <a href="/assets" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Assets</a>
-                            <a href="/ark-nodes" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Ark Nodes</a>
+                        <div class="ml-10 flex items-baseline space-x-1">
+                            <a href="/" class="px-3 py-2 rounded-md text-sm font-medium transition {{ 'text-white bg-white/10' if request.path == '/' else 'text-gray-300 hover:bg-white/10 hover:text-white' }}">Home</a>
+                            <a href="/assets" class="px-3 py-2 rounded-md text-sm font-medium transition {{ 'text-white bg-white/10' if request.path.startswith('/assets') else 'text-gray-300 hover:bg-white/10 hover:text-white' }}">Assets</a>
+                            <a href="/lifts" class="px-3 py-2 rounded-md text-sm font-medium transition {{ 'text-white bg-white/10' if request.path.startswith('/lifts') else 'text-gray-300 hover:bg-white/10 hover:text-white' }}">Lifts</a>
+                            <a href="/lands" class="px-3 py-2 rounded-md text-sm font-medium transition {{ 'text-white bg-white/10' if request.path.startswith('/lands') else 'text-gray-300 hover:bg-white/10 hover:text-white' }}">Lands</a>
+                            <a href="/vutxos" class="px-3 py-2 rounded-md text-sm font-medium transition {{ 'text-white bg-white/10' if request.path.startswith('/vutxos') else 'text-gray-300 hover:bg-white/10 hover:text-white' }}">VUTXOs</a>
+                            <a href="/txs" class="px-3 py-2 rounded-md text-sm font-medium transition {{ 'text-white bg-white/10' if request.path.startswith('/txs') else 'text-gray-300 hover:bg-white/10 hover:text-white' }}">TXs</a>
+                            <a href="/ark-nodes" class="px-3 py-2 rounded-md text-sm font-medium transition {{ 'text-white bg-white/10' if request.path.startswith('/ark-nodes') else 'text-gray-300 hover:bg-white/10 hover:text-white' }}">Ark Nodes</a>
                         </div>
                     </div>
                 </div>
-                <div class="hidden md:block">
-                    <div class="ml-4 flex items-center md:ml-6">
-                        <button class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                            <i class="fas fa-bell"></i>
-                        </button>
+                <div class="flex items-center gap-3">
+                    <div class="hidden md:block">
+                        <div class="ml-4 flex items-center md:ml-6">
+                            <button class="bg-white/5 hover:bg-white/10 p-2 rounded-full text-gray-300 hover:text-white transition focus:outline-none focus:ring-2 focus:ring-white/20" title="Notifications">
+                                <i class="fas fa-bell"></i>
+                            </button>
+                        </div>
                     </div>
+                    <button id="mobileToggle" class="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/20" aria-label="Open main menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
                 </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="md:hidden hidden border-t border-white/10">
+            <div class="px-4 py-3 space-y-1">
+                <a href="/" class="block px-3 py-2 rounded-md text-base font-medium {{ 'text-white bg-white/10' if request.path == '/' else 'text-gray-300 hover:bg-white/10 hover:text-white' }}">Home</a>
+                <a href="/assets" class="block px-3 py-2 rounded-md text-base font-medium {{ 'text-white bg-white/10' if request.path.startswith('/assets') else 'text-gray-300 hover:bg-white/10 hover:text-white' }}">Assets</a>
+                <a href="/lifts" class="block px-3 py-2 rounded-md text-base font-medium {{ 'text-white bg-white/10' if request.path.startswith('/lifts') else 'text-gray-300 hover:bg-white/10 hover:text-white' }}">Lifts</a>
+                <a href="/lands" class="block px-3 py-2 rounded-md text-base font-medium {{ 'text-white bg-white/10' if request.path.startswith('/lands') else 'text-gray-300 hover:bg-white/10 hover:text-white' }}">Lands</a>
+                <a href="/vutxos" class="block px-3 py-2 rounded-md text-base font-medium {{ 'text-white bg-white/10' if request.path.startswith('/vutxos') else 'text-gray-300 hover:bg-white/10 hover:text-white' }}">VUTXOs</a>
+                <a href="/txs" class="block px-3 py-2 rounded-md text-base font-medium {{ 'text-white bg-white/10' if request.path.startswith('/txs') else 'text-gray-300 hover:bg-white/10 hover:text-white' }}">TXs</a>
+                <a href="/ark-nodes" class="block px-3 py-2 rounded-md text-base font-medium {{ 'text-white bg-white/10' if request.path.startswith('/ark-nodes') else 'text-gray-300 hover:bg-white/10 hover:text-white' }}">Ark Nodes</a>
             </div>
         </div>
     </nav>
@@ -42,19 +86,52 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 border-t border-gray-700">
-        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center">
-                <div class="text-sm text-gray-400">
-                    <p>&copy; 2024 Lighthouse. Built for Taproot Asset & Ark.</p>
+    <footer class="mt-16 bg-gradient-to-b from-gray-900/40 to-gray-900 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-lightbulb text-yellow-400 text-xl mr-2"></i>
+                        <span class="text-lg font-extrabold brand-gradient">Lighthouse</span>
+                    </div>
+                    <p class="text-sm text-gray-400 max-w-sm">Monitoring Taproot Assets and Ark L2 activity with beautiful, real-time insights.</p>
+                    <div class="flex items-center gap-3 mt-4">
+                        <a href="#" class="w-9 h-9 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-gray-300 hover:text-white transition glow" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-gray-300 hover:text-white transition glow" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-gray-300 hover:text-white transition glow" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                    </div>
                 </div>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-white">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-white">
-                        <i class="fab fa-twitter"></i>
-                    </a>
+                <div>
+                    <h3 class="text-sm font-semibold text-white tracking-wider mb-3">Explore</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a class="hover:text-white" href="/assets">Assets</a></li>
+                        <li><a class="hover:text-white" href="/vutxos">VUTXOs</a></li>
+                        <li><a class="hover:text-white" href="/txs">Transactions</a></li>
+                        <li><a class="hover:text-white" href="/ark-nodes">Ark Nodes</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-white tracking-wider mb-3">Network</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a class="hover:text-white" href="/lifts">Lifts</a></li>
+                        <li><a class="hover:text-white" href="/lands">Lands</a></li>
+                        <li><a class="hover:text-white" href="/pubs/demo">Public Keys</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-sm font-semibold text-white tracking-wider mb-3">Stay Updated</h3>
+                    <p class="text-sm text-gray-400 mb-3">Subscribe for updates on new assets and network events.</p>
+                    <form class="flex gap-2">
+                        <input type="email" placeholder="you@example.com" class="flex-1 bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        <button type="submit" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-semibold px-4 py-2 rounded-lg text-sm transition glow">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-sm text-gray-400">
+                <p>&copy; 2025 Lighthouse. Built for Taproot Assets & Ark.</p>
+                <div class="flex gap-4 mt-3 sm:mt-0">
+                    <a href="#" class="hover:text-white">Terms</a>
+                    <a href="#" class="hover:text-white">Privacy</a>
                 </div>
             </div>
         </div>
@@ -66,6 +143,14 @@
             document.documentElement.classList.add('dark')
         } else {
             document.documentElement.classList.remove('dark')
+        }
+        // Mobile menu toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileToggle && mobileMenu) {
+          mobileToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+          });
         }
     </script>
 </body>
