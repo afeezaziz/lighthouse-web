@@ -19,12 +19,12 @@ def create_app():
     login_manager.login_view = 'auth.login'
 
     # Register blueprints
-    from app.routes import bp as main_bp
+    from src.routes import bp as main_bp
     app.register_blueprint(main_bp)
 
     @login_manager.user_loader
     def load_user(user_id):
-        from app.models import User
+        from src.models import User
         return User.query.get(int(user_id))
 
     return app
